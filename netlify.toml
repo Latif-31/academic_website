@@ -1,17 +1,14 @@
 [build]
-command = 'echo "No build needed. Static HTML files will be used."'
-publish = 'public'
-
-[build.environment]
-HUGO_VERSION = 'none'  # No need for Hugo if using regular HTML files
+  command = 'echo "No build needed. Static HTML files will be used."'
+  publish = 'public'  # Make sure this is the folder where your HTML files are located
 
 [context]
-[context.branch-deploy]
-command = 'echo "No build for branch deploy. Static HTML files will be used."'
+  [context.branch-deploy]
+  command = 'echo "No build for branch deploy. Static HTML files will be used."'
 
-[context.deploy-preview]
-command = 'echo "No build for deploy preview. Static HTML files will be used."'
+  [context.deploy-preview]
+  command = 'echo "No build for deploy preview. Static HTML files will be used."'
 
-[context.production]
-[context.production.environment]
-HUGO_ENV = 'none'  # No Hugo environment since we are using static files
+  [context.production]
+  [context.production.environment]
+  HUGO_ENV = 'none'  # Not using Hugo anymore
