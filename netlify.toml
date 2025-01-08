@@ -1,6 +1,6 @@
 [build]
   command = 'echo "No build needed. Static HTML files will be used."'
-  publish = 'public'  # Make sure this is the folder where your HTML files are located
+  publish = 'new-version'  # Make sure this is the folder where your HTML files are located
 
 [context]
   [context.branch-deploy]
