@@ -6,7 +6,7 @@
         
         // Style the badge
         badge.style.position = 'fixed';
-        badge.style.top = '0';
+        badge.style.bottom = '0';
         badge.style.left = '0';
         badge.style.width = '100%';
         badge.style.backgroundColor = 'red';
