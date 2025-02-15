@@ -19,3 +19,5 @@
         // Append the badge to the body
         document.body.appendChild(badge);
     }
+
+    // 
