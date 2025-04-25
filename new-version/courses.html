@@ -37,12 +37,64 @@
 
     .menu a {
       font-size: 26px;
-    }
+    }/* Search Bar Styling */
+.search-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+#searchBar {
+  border: none;
+  outline: none;
+  padding: 8px 15px;
+  font-size: 16px;
+  width: 300px;
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+  margin-left: -25px; /* Overlap with input */
+}/* Search Highlight */
+.search-highlight {
+  background: #ffff00;
+  padding: 2px;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+.search-highlight:hover {
+  background: #ffcc00;
+}
   </style>
 </head>
 
 <body>
-  <center width="80%">
+  <!-- Search Bar -->
+<div class="search-container">
+  <input 
+    type="text" 
+    id="searchBar" 
+    placeholder="Search this page (Ctrl+F)..." 
+    oninput="handleSearch()"
+  >
+  <button onclick="clearSearch()" class="clear-btn">×</button>
+</div>
+  <center width="80%" style="
+    margin-bottom: 125px;
+">
     <!-- <img src="./assets/banner.jpeg" alt="Banner_image" width="860px" style="margin: 0px 10%; "> -->
   </center>
   <div style="padding: 0px 10%">
@@ -129,7 +181,40 @@
 
     </div>
     <script src='./assets/main.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script>
+<script>
+  function handleSearch() {
+    const searchTerm = document.getElementById('searchBar').value;
+    const content = document.querySelector('body');
+    
+    // Remove previous highlights
+    const markInstance = new Mark(content);
+    markInstance.unmark();
+    
+    if (searchTerm) {
+      // Highlight new matches
+      markInstance.mark(searchTerm, {
+        element: 'span',
+        className: 'search-highlight',
+        caseSensitive: false,
+        acrossElements: true
+      });
+    }
+  }
 
+  function clearSearch() {
+    document.getElementById('searchBar').value = '';
+    handleSearch(); // Clear highlights
+  }
+
+  // Add keyboard shortcut (Ctrl+/ to focus search)
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+      e.preventDefault();
+      document.getElementById('searchBar').focus();
+    }
+  });
+</script>
 </body>
 
 </html>
